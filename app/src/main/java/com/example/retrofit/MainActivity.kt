@@ -22,19 +22,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+         bind=ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
-        Log.d("Tag", "Country")
+        
 
 
-        bind = ActivityMainBinding.inflate(layoutInflater)
         list = ArrayList()
 
         adapterC = RecyclerAdapter(list, this@MainActivity)
-        bind.recycle.adapter=adapterC
+        bind.recycle.adapter = adapterC
 
-          val layoutManagerC = LinearLayoutManager(this)
+        val layoutManagerC = LinearLayoutManager(this)
         bind.recycle.layoutManager = layoutManagerC
-
 
 
 
