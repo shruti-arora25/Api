@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class dataclass(
     @SerializedName("data")
-    var data: List<Data>,
+    var`data`: List<Data>,
     @SerializedName("message")
     var message: String,
     @SerializedName("status")

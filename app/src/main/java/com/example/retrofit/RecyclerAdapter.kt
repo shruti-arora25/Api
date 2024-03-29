@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit.databinding.ListItemBinding
 
-class RecyclerAdapter(private val List: ArrayList<Data>, Context: Context) :
+class RecyclerAdapter(private val List: ArrayList<String>, context: Context) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
 
@@ -22,7 +22,7 @@ class RecyclerAdapter(private val List: ArrayList<Data>, Context: Context) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = List[position]
         holder.apply {
-            CountryName.text = currentItem.name
+            CountryName.text = currentItem
         }
 
     }
