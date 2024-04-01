@@ -1,4 +1,4 @@
-package com.example.retrofit
+package com.example.retrofit.Basic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,24 +52,19 @@ class MainActivity : AppCompatActivity() {
 
 
         lifecycleScope.launch {
-
             suspendfunc()
-
             Log.d("TAG3-------->",Thread.currentThread().name.toString())
-
 
         }
 
     // method()
-
-
     }
 
     private suspend fun suspendfunc() {
 
          withContext(Dispatchers.IO) {
 
-             //    CoroutineScope(Dispatchers.IO).launch {
+             //  CoroutineScope(Dispatchers.IO).launch {
 
              val response = retro.getfunData()
              if (response.isSuccessful) {
@@ -78,12 +73,9 @@ class MainActivity : AppCompatActivity() {
                      list.add(myData)
 
                  }
-
                  Log.d("TAG2-------->", Thread.currentThread().name.toString())
 
-
              }
-
          }
 
                  adapterC = RecyclerAdapter(list, this@MainActivity)
@@ -102,17 +94,14 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<dataclass>, response: Response<dataclass>) {
 
-
                 if (response.isSuccessful) {
 
                     val dataResponse: dataclass? = response.body()
-
 
                     for (myData in dataResponse?.data!!) {
                         list.add(myData)
 
                     }
-
 
                     adapterC = RecyclerAdapter(list, this@MainActivity)
                     adapterC.notifyDataSetChanged()

@@ -1,4 +1,4 @@
-package com.example.retrofit
+package com.example.retrofit.Basic
 
 import retrofit2.Call
 import retrofit2.Response
