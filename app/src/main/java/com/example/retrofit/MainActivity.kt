@@ -7,7 +7,10 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofit.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         bind = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(bind.root)
-        Log.d("Tag", "Country")
 
 
         list = ArrayList()
@@ -47,40 +49,52 @@ class MainActivity : AppCompatActivity() {
             .build().create(ApiInterface::class.java)
 
 
+
+
         lifecycleScope.launch {
+
             suspendfunc()
+
+            Log.d("TAG3-------->",Thread.currentThread().name.toString())
+
+
         }
 
-
-        // method()
+    // method()
 
 
     }
 
     private suspend fun suspendfunc() {
-        var response =
-            retro.getfunData().body()
+
+         withContext(Dispatchers.IO) {
+
+             //    CoroutineScope(Dispatchers.IO).launch {
+
+             val response = retro.getfunData()
+             if (response.isSuccessful) {
+
+                 for (myData in response.body()?.data!!) {
+                     list.add(myData)
+
+                 }
+
+                 Log.d("TAG2-------->", Thread.currentThread().name.toString())
 
 
-        for (myData in response?.data!!) {
-            list.add(myData)
+             }
 
-        }
+         }
 
+                 adapterC = RecyclerAdapter(list, this@MainActivity)
+                 adapterC.notifyDataSetChanged()
 
-        adapterC = RecyclerAdapter(list, this@MainActivity)
-        adapterC.notifyDataSetChanged()
-
-
-
-        bind.recycle.adapter = adapterC
-
+                 bind.recycle.adapter = adapterC
 
     }
 
 
     fun method() {
-
 
         val data: Call<dataclass> = retro.getData()
 
